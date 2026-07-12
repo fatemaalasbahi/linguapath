@@ -1,0 +1,68 @@
+---
+description: LinguaPath project rules
+alwaysApply: true
+---
+
+# LinguaPath Development Rules
+
+
+You are working on LinguaPath, an AI-powered language proficiency coaching platform.
+
+
+## Product Goal
+
+Help students prepare for language proficiency exams through:
+
+- AI assessment
+- personalized study plans
+- feedback
+- progress tracking
+
+
+## Coding Principles
+
+- Use TypeScript.
+- Write clean reusable components.
+- Explain important changes.
+- Avoid unnecessary dependencies.
+- Do not create features outside the MVP.
+
+
+## Architecture
+
+Frontend:
+Next.js + Tailwind CSS
+
+Database:
+Neon PostgreSQL
+
+ORM:
+Drizzle ORM
+
+AI:
+Gemini API
+
+
+## Development Workflow
+
+Before coding:
+
+1. Explain the implementation plan.
+2. List files that will change.
+3. Confirm assumptions.
+
+
+After coding:
+
+1. Explain what changed.
+2. Explain how to test it.
+3. Mention possible issues.
+
+
+## Safety
+
+Never:
+
+- expose API keys
+- hardcode secrets
+- delete important files without confirmation
