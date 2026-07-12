@@ -5,59 +5,159 @@ alwaysApply: true
 
 # LinguaPath Development Rules
 
-
 You are working on LinguaPath, an AI-powered language proficiency coaching platform.
 
+Always consider the project documentation before making changes:
+
+- PROJECT_PROPOSAL.md
+- FEATURE_SPECIFICATION.md
+- DATABASE_SCHEMA.md
+- CURSOR_PROJECT_GUIDE.md
+
+The goal is to build a professional, production-style SaaS application while following the TECHNEST AI Programming course approach.
+
+---
 
 ## Product Goal
 
 Help students prepare for language proficiency exams through:
 
-- AI assessment
-- personalized study plans
-- feedback
-- progress tracking
+- AI diagnostic assessment
+- Personalized study plans
+- Practice feedback
+- Progress tracking
 
+---
+
+## Technology Stack
+
+Frontend:
+
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+
+Backend:
+
+- Next.js Route Handlers and Server Actions
+
+Database:
+
+- Neon PostgreSQL
+- Drizzle ORM
+
+Authentication:
+
+- Neon Auth (passwords are NOT stored in the application database)
+
+AI:
+
+- Gemini API
+
+Deployment:
+
+- Vercel
+
+Notifications:
+
+- Slack Webhooks
+
+---
+
+## Development Phases
+
+Work in this order:
+
+1. Project setup
+2. Landing page
+3. Database setup (Neon + Drizzle)
+4. Authentication (Neon Auth)
+5. Dashboard + Exam Goals
+6. AI Diagnostic Assessment
+7. AI Study Plan Generation
+8. Practice Feedback + Progress Tracking
+9. Slack Notifications + Feedback System
+10. Deployment
+
+Do not skip ahead or add features outside the current phase without approval.
+
+---
 
 ## Coding Principles
 
-- Use TypeScript.
-- Write clean reusable components.
-- Explain important changes.
-- Avoid unnecessary dependencies.
-- Do not create features outside the MVP.
+- Use TypeScript
+- Use Next.js App Router (`src/app/`)
+- Write clean reusable components
+- Explain important changes
+- Avoid unnecessary dependencies
+- Do not create features outside the MVP
+- Prefer simple reliable solutions
 
+---
 
-## Architecture
+## Authentication Rules
 
-Frontend:
-Next.js + Tailwind CSS
+- Use Neon Auth for registration, login, and sessions
+- The `users` table stores application profile data only
+- Reference Neon Auth via `neon_auth_user_id`
+- Never store passwords in the application database
 
-Database:
-Neon PostgreSQL
+---
 
-ORM:
-Drizzle ORM
+## Database Rules
 
-AI:
-Gemini API
+Before creating database features, check DATABASE_SCHEMA.md.
 
+The MVP includes these tables:
+
+- users
+- exam_profiles
+- assessments
+- practice_submissions
+- study_plans
+- progress
+- feedback
+
+Key rules:
+
+- Diagnostic assessments (`assessments`) are separate from practice submissions (`practice_submissions`)
+- Support numeric exams (current_score, target_score) and level-based exams (current_level, target_level)
+- Use Drizzle ORM
+- Maintain user data separation
+- Support future expansion
+
+---
+
+## MVP Scope — Do Not Include
+
+- File uploads
+- Live speaking evaluation
+- Video lessons
+- Social networking
+- Teacher marketplace
+- Mobile application
+- Email notifications
+
+---
 
 ## Development Workflow
 
 Before coding:
 
-1. Explain the implementation plan.
-2. List files that will change.
-3. Confirm assumptions.
-
+1. Explain the implementation plan
+2. List files that will change
+3. List required dependencies
+4. Confirm assumptions
+5. Wait for approval before major changes
 
 After coding:
 
-1. Explain what changed.
-2. Explain how to test it.
-3. Mention possible issues.
+1. Explain what changed
+2. Explain how to test it
+3. Mention possible issues
 
+---
 
 ## Safety
 
@@ -65,4 +165,15 @@ Never:
 
 - expose API keys
 - hardcode secrets
+- store passwords in the application database
 - delete important files without confirmation
+
+Environment variables in `.env.local`:
+
+```
+DATABASE_URL=
+GEMINI_API_KEY=
+SLACK_WEBHOOK_URL=
+```
+
+Add Neon Auth environment variables as required during Phase 4 implementation.
