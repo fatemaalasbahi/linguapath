@@ -172,6 +172,27 @@ Diagnostic assessments are separate from ongoing practice submissions (see `prac
 
 Stores student practice responses and AI feedback separately from initial diagnostic assessments.
 
+Supports both numeric and level-based exam feedback through nullable `score` and `level` fields.
+
+---
+
+## Practice Result Scoring
+
+Practice feedback results follow the same scoring model as the related exam profile.
+
+| Exam type | Scoring model | Field used | Field unused |
+|-----------|---------------|------------|--------------|
+| DET | `numeric` | `score` | `level` (null) |
+| HSK | `level` | `level` | `score` (null) |
+
+**Rules:**
+
+- `score` and `level` are both **nullable**.
+- Numeric exams (e.g. DET) populate `score`; `level` remains null.
+- Level-based exams (e.g. HSK) populate `level`; `score` remains null.
+- Both fields must **not** be required at the same time — only one should be set per submission.
+- The application determines which field to store and display based on the related `exam_profiles.scoring_model`.
+
 ---
 
 ## Fields
@@ -184,18 +205,32 @@ Stores student practice responses and AI feedback separately from initial diagno
 | submission_type | Text | Type of practice (e.g. writing) |
 | student_response | Text | Student's practice answer |
 | ai_feedback | Text | AI-generated feedback |
-| score | Integer | Estimated score (numeric exams, if applicable) |
+| score | Integer (nullable) | AI estimated score (numeric exams only) |
+| level | Text (nullable) | AI estimated level (level-based exams only) |
 | created_at | Timestamp | Submission date |
 
 ---
 
-## Example
+## Example — DET (numeric)
 
 ```
 Submission Type: writing
 Student Response: "I think education is very important because..."
 AI Feedback: "Good structure. Improve academic vocabulary in paragraph 2."
 Score: 108
+Level: null
+```
+
+---
+
+## Example — HSK (level-based)
+
+```
+Submission Type: writing
+Student Response: "我认为教育非常重要，因为..."
+AI Feedback: "Good sentence structure. Expand vocabulary range."
+Score: null
+Level: HSK 4
 ```
 
 ---
@@ -261,12 +296,24 @@ Tracks student improvement and completed activities over time.
 
 ---
 
-## Example Activities
+## Example Activities — DET
 
 ```
 Activity Type: Writing Practice
 Score: 110
+Level: null
 Notes: Improved grammar accuracy
+```
+
+---
+
+## Example Activities — HSK
+
+```
+Activity Type: Writing Practice
+Score: null
+Level: HSK 4
+Notes: Improved vocabulary range
 ```
 
 ---
@@ -371,6 +418,7 @@ The schema should:
 - Support multiple exams and scoring models
 - Keep user data separated
 - Separate diagnostic assessments from practice submissions
+- Store practice results as `score` or `level` based on exam scoring model — not both
 - Allow future feature expansion
 - Work efficiently with Drizzle ORM
 - Never store passwords (authentication handled by Neon Auth)
