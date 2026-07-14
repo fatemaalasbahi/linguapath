@@ -1,9 +1,6 @@
 import { HeroGraphic } from "@/components/landing/HeroGraphic";
 import { Button } from "@/components/ui/Button";
 
-/* Phase 4: Replace href="#" with /sign-up route */
-const AUTH_PLACEHOLDER = "#";
-
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-600 to-accent-500">
@@ -24,12 +21,10 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button
-              href={AUTH_PLACEHOLDER}
+              href="/sign-up"
               variant="secondary"
               size="lg"
               className="border-white/20 bg-white text-primary-700 hover:bg-primary-50"
-              aria-label="Get started — authentication available in Phase 4"
-              title="Get started — coming in Phase 4"
             >
               Get Started
             </Button>

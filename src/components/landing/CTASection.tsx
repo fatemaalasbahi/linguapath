@@ -1,9 +1,6 @@
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Button } from "@/components/ui/Button";
 
-/* Phase 4: Replace href="#" with /sign-up route */
-const AUTH_PLACEHOLDER = "#";
-
 export function CTASection() {
   return (
     <SectionContainer className="bg-neutral-50">
@@ -17,12 +14,10 @@ export function CTASection() {
         </p>
         <div className="mt-8">
           <Button
-            href={AUTH_PLACEHOLDER}
+            href="/sign-up"
             variant="secondary"
             size="lg"
             className="border-white/20 bg-white text-primary-700 hover:bg-primary-50"
-            aria-label="Create free account — authentication available in Phase 4"
-            title="Create free account — coming in Phase 4"
           >
             Create Free Account
           </Button>

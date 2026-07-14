@@ -13,6 +13,8 @@
     "db:test": "tsx scripts/test-db-connection.ts"
   },
   "dependencies": {
+    "@neondatabase/auth": "^0.4.2-beta",
+    "@neondatabase/auth-ui": "^0.2.1-beta",
     "@neondatabase/serverless": "^1.1.0",
     "drizzle-orm": "^0.45.2",
     "lucide-react": "^1.24.0",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Logo } from "@/components/landing/Logo";
 import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
@@ -9,9 +10,6 @@ const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
 ] as const;
-
-/* Phase 4: Replace href="#" with /sign-in and /sign-up routes */
-const AUTH_PLACEHOLDER = "#";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,9 +20,9 @@ export function Navbar() {
         className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
         aria-label="Main navigation"
       >
-        <a href="#" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2">
+        <Link href="/" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2">
           <Logo />
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
@@ -40,22 +38,10 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button
-            href={AUTH_PLACEHOLDER}
-            variant="ghost"
-            size="sm"
-            aria-label="Sign in — authentication available in Phase 4"
-            title="Sign in — coming in Phase 4"
-          >
+          <Button href="/sign-in" variant="ghost" size="sm">
             Sign In
           </Button>
-          <Button
-            href={AUTH_PLACEHOLDER}
-            variant="primary"
-            size="sm"
-            aria-label="Get started — authentication available in Phase 4"
-            title="Get started — coming in Phase 4"
-          >
+          <Button href="/sign-up" variant="primary" size="sm">
             Get Started
           </Button>
         </div>
@@ -96,21 +82,17 @@ export function Navbar() {
           </ul>
           <div className="mt-4 flex flex-col gap-2 border-t border-neutral-200 pt-4">
             <Button
-              href={AUTH_PLACEHOLDER}
+              href="/sign-in"
               variant="ghost"
               className="w-full"
-              aria-label="Sign in — authentication available in Phase 4"
-              title="Sign in — coming in Phase 4"
               onClick={() => setMobileOpen(false)}
             >
               Sign In
             </Button>
             <Button
-              href={AUTH_PLACEHOLDER}
+              href="/sign-up"
               variant="primary"
               className="w-full"
-              aria-label="Get started — authentication available in Phase 4"
-              title="Get started — coming in Phase 4"
               onClick={() => setMobileOpen(false)}
             >
               Get Started
