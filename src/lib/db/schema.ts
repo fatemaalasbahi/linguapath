@@ -27,6 +27,7 @@ export const examProfiles = pgTable("exam_profiles", {
   id: uuid("id").primaryKey().defaultRandom(),
   userId: uuid("user_id")
     .notNull()
+    .unique()
     .references(() => users.id, { onDelete: "cascade" }),
   language: text("language").notNull(),
   examType: text("exam_type").notNull(),

@@ -1,10 +1,13 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { SignOutButton } from "@/components/auth/SignOutButton";
+import { ExamGoalSummary } from "@/components/dashboard/ExamGoalSummary";
+import { FeaturePlaceholderGrid } from "@/components/dashboard/FeaturePlaceholderGrid";
 import { Card } from "@/components/ui/Card";
 import { auth } from "@/lib/auth/server";
-import { getPostAuthRedirect } from "@/lib/auth/redirects";
 import { syncUserFromSession } from "@/lib/auth/sync-user";
+import { getExamProfileForUser } from "@/lib/exam-profile/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -16,36 +19,50 @@ export default async function DashboardPage() {
   }
 
   const appUser = await syncUserFromSession(session);
-  const destination = await getPostAuthRedirect(appUser.id);
+  const profile = await getExamProfileForUser(appUser.id);
 
-  if (destination !== "/dashboard") {
-    redirect(destination);
+  if (!profile) {
+    redirect("/exam-goals/setup");
   }
 
-  return (
-    <Card className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary-600">
-            Protected area
-          </p>
-          <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">
-            Dashboard
-          </h1>
-          <p className="text-sm leading-relaxed text-neutral-600">
-            Your personalized exam preparation dashboard will be available in
-            Phase 5.
-          </p>
-        </div>
-        <SignOutButton />
-      </div>
+  const displayName = appUser.name ?? session.user.email;
 
-      <p className="text-sm text-neutral-500">
-        Signed in as{" "}
-        <span className="font-medium text-neutral-700">
-          {session.user.email}
-        </span>
-      </p>
-    </Card>
+  return (
+    <div className="space-y-6">
+      <Card className="space-y-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary-600">
+              Dashboard
+            </p>
+            <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">
+              Welcome back, {displayName}
+            </h1>
+            <p className="text-sm leading-relaxed text-neutral-600">
+              Here is an overview of your exam goal and upcoming learning
+              features.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/exam-goals/setup"
+              className="text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
+            >
+              Edit Exam Goal
+            </Link>
+            <SignOutButton />
+          </div>
+        </div>
+
+        <ExamGoalSummary profile={profile} />
+      </Card>
+
+      <div className="space-y-4">
+        <h2 className="text-lg font-semibold text-neutral-900">
+          Coming Next
+        </h2>
+        <FeaturePlaceholderGrid />
+      </div>
+    </div>
   );
 }
