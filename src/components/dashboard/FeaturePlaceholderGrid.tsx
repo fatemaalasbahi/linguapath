@@ -1,12 +1,8 @@
+import Link from "next/link";
+
 import { Card } from "@/components/ui/Card";
 
 const placeholderFeatures = [
-  {
-    title: "AI Diagnostic Assessment",
-    description:
-      "Estimate your current exam readiness with an AI-powered diagnostic.",
-    phase: "Phase 6",
-  },
   {
     title: "Study Plan",
     description:
@@ -29,7 +25,26 @@ const placeholderFeatures = [
 
 export function FeaturePlaceholderGrid() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="space-y-4">
+      <Card className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="space-y-2">
+          <h3 className="text-base font-semibold text-neutral-900">
+            AI Diagnostic Assessment
+          </h3>
+          <p className="text-sm leading-relaxed text-neutral-600">
+            Estimate your current exam readiness with an AI-powered writing
+            diagnostic.
+          </p>
+        </div>
+        <Link
+          href="/assessment"
+          className="inline-flex h-10 items-center justify-center rounded-md bg-primary-600 px-4 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+        >
+          Start Assessment
+        </Link>
+      </Card>
+
+      <div className="grid gap-4 sm:grid-cols-2">
       {placeholderFeatures.map((feature) => (
         <Card key={feature.title} className="space-y-3 p-5">
           <div className="flex items-start justify-between gap-3">
@@ -48,6 +63,7 @@ export function FeaturePlaceholderGrid() {
           </p>
         </Card>
       ))}
+      </div>
     </div>
   );
 }

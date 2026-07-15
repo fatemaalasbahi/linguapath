@@ -9,6 +9,7 @@ import {
 } from "@/lib/exam-profile/format";
 import type { ExamType } from "@/lib/exam-profile/constants";
 
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 
 type ExamGoalSummaryProps = {
@@ -69,10 +70,22 @@ export function ExamGoalSummary({ profile }: ExamGoalSummaryProps) {
         />
       </div>
 
-      {!isCurrentAbilityAssessed(profile) && (
-        <p className="rounded-md border border-primary-100 bg-primary-50 px-4 py-3 text-sm text-primary-800">
-          Take the AI Diagnostic Assessment to estimate your current exam level.
-        </p>
+      {!isCurrentAbilityAssessed(profile) ? (
+        <div className="space-y-3 rounded-md border border-primary-100 bg-primary-50 px-4 py-4">
+          <p className="text-sm text-primary-800">
+            Take the AI Diagnostic Assessment to estimate your current exam
+            level.
+          </p>
+          <Button href="/assessment" size="sm">
+            Start AI Diagnostic Assessment
+          </Button>
+        </div>
+      ) : (
+        <div className="flex flex-wrap items-center gap-3">
+          <Button href="/assessment" variant="secondary" size="sm">
+            Retake Diagnostic Assessment
+          </Button>
+        </div>
       )}
     </div>
   );

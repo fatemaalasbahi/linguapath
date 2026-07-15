@@ -13,6 +13,7 @@
     "db:test": "tsx scripts/test-db-connection.ts"
   },
   "dependencies": {
+    "@google/genai": "^2.11.0",
     "@neondatabase/auth": "^0.4.2-beta",
     "@neondatabase/auth-ui": "^0.2.1-beta",
     "@neondatabase/serverless": "^1.1.0",
@@ -21,7 +22,8 @@
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
