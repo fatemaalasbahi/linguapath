@@ -94,6 +94,12 @@ export function getPriorityTasksForWeek(
   return [...interactiveTasks, ...otherTasks].slice(0, limit);
 }
 
+export function getWritingTaskForWeek(
+  week: StudyPlanWeek,
+): StudyPlanTask | null {
+  return week.tasks.find((task) => task.skill === "writing") ?? null;
+}
+
 export function getDiagnosticInsights(assessment: {
   strengths: string | null;
   weaknesses: string | null;

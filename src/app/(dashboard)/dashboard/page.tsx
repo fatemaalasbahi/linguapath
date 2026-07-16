@@ -1,14 +1,21 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { SignOutButton } from "@/components/auth/SignOutButton";
+import { DashboardProgressCard } from "@/components/dashboard/DashboardProgressCard";
 import { ExamGoalSummary } from "@/components/dashboard/ExamGoalSummary";
 import { FeaturePlaceholderGrid } from "@/components/dashboard/FeaturePlaceholderGrid";
+import { NextRecommendedAction } from "@/components/dashboard/NextRecommendedAction";
+import { RecentPracticeResult } from "@/components/dashboard/RecentPracticeResult";
 import { StudyPlanPreview } from "@/components/dashboard/StudyPlanPreview";
+import { SignOutButton } from "@/components/auth/SignOutButton";
 import { Card } from "@/components/ui/Card";
 import { auth } from "@/lib/auth/server";
 import { syncUserFromSession } from "@/lib/auth/sync-user";
+import { getNextRecommendedAction } from "@/lib/dashboard/recommendations";
 import { getExamProfileForUser } from "@/lib/exam-profile/queries";
+import type { ExamType } from "@/lib/exam-profile/constants";
+import { getLatestPracticeSubmissionForUser } from "@/lib/practice/queries";
+import { getProgressMetricsForUser } from "@/lib/progress/summary";
 import { getActiveStudyPlanForUser } from "@/lib/study-plan/queries";
 
 export const dynamic = "force-dynamic";
@@ -27,8 +34,22 @@ export default async function DashboardPage() {
     redirect("/exam-goals/setup");
   }
 
-  const activePlan = await getActiveStudyPlanForUser(appUser.id);
+  const [activePlan, latestPractice, progressMetrics] = await Promise.all([
+    getActiveStudyPlanForUser(appUser.id),
+    getLatestPracticeSubmissionForUser(appUser.id),
+    getProgressMetricsForUser(appUser.id, profile),
+  ]);
+
+  const recommendedAction = getNextRecommendedAction({
+    profile,
+    activePlan,
+    latestPractice,
+  });
   const displayName = appUser.name ?? session.user.email;
+  const examType = profile.examType as ExamType;
+  const hasProgressData =
+    progressMetrics.baseline.source !== "none" ||
+    progressMetrics.latestPractice != null;
 
   return (
     <div className="space-y-6">
@@ -42,8 +63,8 @@ export default async function DashboardPage() {
               Welcome back, {displayName}
             </h1>
             <p className="text-sm leading-relaxed text-neutral-600">
-              Here is an overview of your exam goal and upcoming learning
-              features.
+              Here is an overview of your exam goal, study plan, and practice
+              progress.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -60,11 +81,24 @@ export default async function DashboardPage() {
         <ExamGoalSummary profile={profile} />
       </Card>
 
+      <NextRecommendedAction action={recommendedAction} />
+
       {activePlan ? <StudyPlanPreview plan={activePlan} /> : null}
+
+      {latestPractice ? (
+        <RecentPracticeResult
+          submission={latestPractice}
+          examType={examType}
+        />
+      ) : null}
+
+      {hasProgressData ? (
+        <DashboardProgressCard metrics={progressMetrics} />
+      ) : null}
 
       <div className="space-y-4">
         <h2 className="text-lg font-semibold text-neutral-900">
-          Coming Next
+          Learning Features
         </h2>
         <FeaturePlaceholderGrid />
       </div>

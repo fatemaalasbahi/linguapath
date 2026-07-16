@@ -22,3 +22,20 @@ export type AssessmentDisplayResult = AssessmentEvaluationResult & {
   examType: ExamType;
   profileUpdated: boolean;
 };
+
+export type PracticeDisplayResult = {
+  examType: ExamType;
+  estimatedScore: number | null;
+  estimatedLevel: HskLevel | null;
+  grammarFeedback: string;
+  vocabularyFeedback: string;
+  structureFeedback: string;
+  grammarStatus: "strength" | "needs_attention" | "recommended_focus";
+  vocabularyStatus: "strength" | "needs_attention" | "recommended_focus";
+  structureStatus: "strength" | "needs_attention" | "recommended_focus";
+  strengths: string[];
+  areasToImprove: string[];
+  correctedExamples: string[];
+  nextPracticeRecommendation: string;
+  confidence: AssessmentConfidence;
+};

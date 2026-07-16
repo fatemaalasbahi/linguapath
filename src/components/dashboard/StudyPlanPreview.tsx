@@ -1,10 +1,12 @@
 import Link from "next/link";
 
 import { Card } from "@/components/ui/Card";
+import { getPracticeHrefForPlan } from "@/lib/dashboard/recommendations";
 import type { StudyPlan } from "@/lib/db/schema";
 import {
   getCurrentPlanWeek,
   getPriorityTasksForWeek,
+  getWritingTaskForWeek,
 } from "@/lib/study-plan/format";
 import { getCurrentWeekNumber } from "@/lib/study-plan/dates";
 import type { StudyPlanContent } from "@/lib/study-plan/schemas";
@@ -29,6 +31,8 @@ export function StudyPlanPreview({ plan }: StudyPlanPreviewProps) {
   }
 
   const priorityTasks = getPriorityTasksForWeek(currentWeek, 2);
+  const writingTask = getWritingTaskForWeek(currentWeek);
+  const practiceHref = getPracticeHrefForPlan(plan);
 
   return (
     <Card className="space-y-4 p-5">
@@ -62,12 +66,22 @@ export function StudyPlanPreview({ plan }: StudyPlanPreviewProps) {
         </ul>
       </div>
 
-      <Link
-        href="/study-plan"
-        className="inline-flex text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
-      >
-        View Full Plan →
-      </Link>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        {writingTask ? (
+          <Link
+            href={practiceHref}
+            className="inline-flex h-10 items-center justify-center rounded-md bg-primary-600 px-4 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+          >
+            Start Writing Practice
+          </Link>
+        ) : null}
+        <Link
+          href="/study-plan"
+          className="inline-flex text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
+        >
+          View Full Plan →
+        </Link>
+      </div>
     </Card>
   );
 }

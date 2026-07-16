@@ -54,7 +54,11 @@ export function StudyPlanWeekCard({
           </p>
           <ul className="space-y-3">
             {week.tasks.map((task) => (
-              <StudyPlanTaskRow key={`${week.weekNumber}-${task.title}`} task={task} />
+              <StudyPlanTaskRow
+                key={`${week.weekNumber}-${task.title}`}
+                task={task}
+                weekNumber={week.weekNumber}
+              />
             ))}
           </ul>
         </div>

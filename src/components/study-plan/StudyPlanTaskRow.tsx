@@ -1,11 +1,19 @@
+import Link from "next/link";
+
 import type { StudyPlanTask } from "@/lib/study-plan/schemas";
 import { getSkillLabel } from "@/lib/study-plan/format";
 
 type StudyPlanTaskRowProps = {
   task: StudyPlanTask;
+  weekNumber?: number;
 };
 
-export function StudyPlanTaskRow({ task }: StudyPlanTaskRowProps) {
+export function StudyPlanTaskRow({ task, weekNumber }: StudyPlanTaskRowProps) {
+  const practiceHref =
+    task.isInteractive && weekNumber != null
+      ? `/practice?week=${weekNumber}`
+      : "/practice";
+
   return (
     <li className="space-y-2 rounded-md border border-neutral-100 bg-neutral-50 px-4 py-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -23,9 +31,12 @@ export function StudyPlanTaskRow({ task }: StudyPlanTaskRowProps) {
         {task.description}
       </p>
       {task.isInteractive ? (
-        <p className="text-xs font-medium text-accent-500">
-          Interactive writing practice coming in Phase 8.
-        </p>
+        <Link
+          href={practiceHref}
+          className="inline-flex text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
+        >
+          Start Writing Practice →
+        </Link>
       ) : (
         <p className="text-xs font-medium text-neutral-500">
           Recommended offline study task
