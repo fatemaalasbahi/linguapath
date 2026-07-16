@@ -13,6 +13,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <NeonAuthUIProvider
       authClient={authClient}
+      basePath=""
       defaultTheme="light"
       redirectTo="/auth/continue"
       navigate={router.push}
