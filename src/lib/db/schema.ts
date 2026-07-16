@@ -81,14 +81,7 @@ export const practiceSubmissions = pgTable("practice_submissions", {
     .notNull(),
 });
 
-export type StudyPlanContent = Record<
-  string,
-  {
-    writing?: string;
-    vocabulary?: string;
-    reading?: string;
-  }
->;
+import type { StudyPlanContent } from "@/lib/study-plan/schemas";
 
 export const studyPlans = pgTable("study_plans", {
   id: uuid("id").primaryKey().defaultRandom(),

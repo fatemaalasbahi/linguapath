@@ -103,10 +103,9 @@ export function AssessmentResults({ result }: AssessmentResultsProps) {
           Back to Dashboard
         </Button>
         <Button
+          href="/study-plan"
           variant="secondary"
-          disabled
-          className="w-full cursor-not-allowed sm:w-auto"
-          title="Available in Phase 7"
+          className="w-full sm:w-auto"
         >
           Generate Study Plan
         </Button>

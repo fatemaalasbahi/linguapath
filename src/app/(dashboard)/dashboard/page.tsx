@@ -4,10 +4,12 @@ import { redirect } from "next/navigation";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { ExamGoalSummary } from "@/components/dashboard/ExamGoalSummary";
 import { FeaturePlaceholderGrid } from "@/components/dashboard/FeaturePlaceholderGrid";
+import { StudyPlanPreview } from "@/components/dashboard/StudyPlanPreview";
 import { Card } from "@/components/ui/Card";
 import { auth } from "@/lib/auth/server";
 import { syncUserFromSession } from "@/lib/auth/sync-user";
 import { getExamProfileForUser } from "@/lib/exam-profile/queries";
+import { getActiveStudyPlanForUser } from "@/lib/study-plan/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +27,7 @@ export default async function DashboardPage() {
     redirect("/exam-goals/setup");
   }
 
+  const activePlan = await getActiveStudyPlanForUser(appUser.id);
   const displayName = appUser.name ?? session.user.email;
 
   return (
@@ -56,6 +59,8 @@ export default async function DashboardPage() {
 
         <ExamGoalSummary profile={profile} />
       </Card>
+
+      {activePlan ? <StudyPlanPreview plan={activePlan} /> : null}
 
       <div className="space-y-4">
         <h2 className="text-lg font-semibold text-neutral-900">
