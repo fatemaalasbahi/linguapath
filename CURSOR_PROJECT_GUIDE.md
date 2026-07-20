@@ -237,9 +237,21 @@ Build:
 
 Build:
 
-- User feedback form
-- Store feedback in `feedback` table
-- Slack webhook notifications
+- Authenticated `/feedback` page with category, rating, and message fields
+- User feedback form with loading, success, and error states
+- Store feedback in `feedback` table (including `feedback_type` and `rating`)
+- Slack webhook notifications using Block Kit formatting
+- App sidebar navigation with Feedback link (desktop + mobile)
+- Server-side Zod validation and rate limiting (5 successful submissions per user per 24 hours)
+
+Environment:
+
+- `SLACK_WEBHOOK_URL` (server-only; never exposed to the browser)
+
+Slack behavior:
+
+- Notify after successful database save
+- Slack failures are logged server-side but do not fail the user submission
 
 ---
 

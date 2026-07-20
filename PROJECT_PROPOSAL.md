@@ -271,7 +271,7 @@ LinguaPath will be developed incrementally in small, testable phases.
 | Phase 6 | AI Diagnostic Assessment |
 | Phase 7 | AI Study Plan Generation |
 | Phase 8 | Practice Feedback + Progress Tracking |
-| Phase 9 | Slack Notifications + Feedback System |
+| Phase 9 | Slack Notifications + Feedback System (form, rating, rate limit, Block Kit Slack, app sidebar) |
 | Phase 10 | Deployment |
 
 ---

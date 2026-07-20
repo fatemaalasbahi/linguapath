@@ -1287,6 +1287,8 @@ Let users submit comments, suggestions, or bug reports. Triggers Slack notificat
 │          │  │ Feedback Type    [Comment ▼]                    │  │
 │          │  │   Options: Comment | Suggestion | Bug Report    │  │
 │          │  │                                                 │  │
+│          │  │ Rating           ( ) 1  ( ) 2  ...  ( ) 5      │  │
+│          │  │                                                 │  │
 │          │  │ Message          [Textarea]                     │  │
 │          │  │                                                 │  │
 │          │  │ [Submit Feedback — Primary]                     │  │
@@ -1298,9 +1300,14 @@ Let users submit comments, suggestions, or bug reports. Triggers Slack notificat
 ### Components
 
 - Feedback type select
+- Rating selector (1–5)
 - Message textarea
 - Submit button
 - Success toast / alert
+
+### Navigation
+
+Phase 9 implements the app sidebar described in **App Sidebar (Dashboard — desktop)** and **App Bottom Nav (Mobile)**. The Feedback item uses the `MessageSquare` icon and links to `/feedback`.
 
 ### User Journey
 

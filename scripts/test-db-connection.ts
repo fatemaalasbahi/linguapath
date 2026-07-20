@@ -60,6 +60,37 @@ async function main() {
       console.log(`- ${table}`);
     }
 
+    const ratingColumn = await sql`
+      SELECT column_name, is_nullable
+      FROM information_schema.columns
+      WHERE table_schema = 'public'
+        AND table_name = 'feedback'
+        AND column_name = 'rating'
+    `;
+
+    if (ratingColumn.length === 0) {
+      console.error('Missing expected column: feedback.rating');
+      process.exit(1);
+    }
+
+    if (ratingColumn[0]?.is_nullable !== "NO") {
+      console.error('Expected feedback.rating to be NOT NULL.');
+      process.exit(1);
+    }
+
+    const ratingCheck = await sql`
+      SELECT conname
+      FROM pg_constraint
+      WHERE conname = 'feedback_rating_check'
+    `;
+
+    if (ratingCheck.length === 0) {
+      console.error('Missing expected constraint: feedback_rating_check');
+      process.exit(1);
+    }
+
+    console.log("Feedback rating column and CHECK constraint verified.");
+
     console.log("Database test completed successfully.");
   } catch (error) {
     console.error("Database test failed.");

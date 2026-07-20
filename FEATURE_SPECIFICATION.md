@@ -317,6 +317,7 @@ Users can provide:
 - Comments
 - Suggestions
 - Bug reports
+- A rating from 1 to 5
 
 ---
 
@@ -325,7 +326,11 @@ Users can provide:
 Feedback must:
 
 - Be stored in the database
-- Trigger a Slack notification
+- Trigger a Slack notification to the configured `#feedback` channel
+- Be validated on the server with Zod before persistence
+- Limit successful submissions to 5 per user per rolling 24 hours
+
+Slack delivery failure must not delete or block feedback that was already saved successfully.
 
 ---
 

@@ -332,11 +332,29 @@ Stores user feedback about LinguaPath.
 |---|---|---|
 | id | UUID | Feedback ID |
 | user_id | UUID | Related user |
-| message | Text | User feedback |
-| status | Text | New/Reviewed |
+| feedback_type | Text | Category: `comment`, `suggestion`, or `bug_report` |
+| rating | Integer | User rating from 1 to 5 (CHECK constraint) |
+| message | Text | User feedback message |
+| status | Text | Review status: `new` or `reviewed` |
 | created_at | Timestamp | Submission date |
 
 ---
+
+## Category Values
+
+| Stored value | Meaning |
+|---|---|
+| comment | General comment |
+| suggestion | Feature or improvement suggestion |
+| bug_report | Bug report |
+
+---
+
+## Constraints
+
+- `rating` must be between 1 and 5 (database CHECK constraint)
+- `rating` is NOT NULL for all rows
+- Existing rows without a rating are backfilled during migration before NOT NULL is applied
 
 # Database Relationships
 

@@ -15,6 +15,13 @@
       "when": 1784151023221,
       "tag": "0001_heavy_liz_osborn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1784236800000,
+      "tag": "0002_feedback_rating",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,6 @@
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
+  check,
   date,
   integer,
   jsonb,
@@ -116,18 +117,28 @@ export const progress = pgTable("progress", {
     .notNull(),
 });
 
-export const feedback = pgTable("feedback", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  feedbackType: text("feedback_type").notNull(),
-  message: text("message").notNull(),
-  status: text("status").notNull().default("new"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-});
+export const feedback = pgTable(
+  "feedback",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    feedbackType: text("feedback_type").notNull(),
+    rating: integer("rating").notNull(),
+    message: text("message").notNull(),
+    status: text("status").notNull().default("new"),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    check(
+      "feedback_rating_check",
+      sql`${table.rating} >= 1 AND ${table.rating} <= 5`,
+    ),
+  ],
+);
 
 export const usersRelations = relations(users, ({ many }) => ({
   examProfiles: many(examProfiles),
