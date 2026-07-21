@@ -25,11 +25,13 @@ export function Footer() {
               GitHub
             </a>
             <a
-              href="#"
+              href="https://github.com/fatemaalasbahi/linguapath/issues"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-neutral-700 transition-colors hover:text-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
-              aria-label="Contact — placeholder link"
+              aria-label="Report an issue on GitHub (opens in new tab)"
             >
-              Contact
+              Feedback & Issues
             </a>
           </div>
         </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Card } from "@/components/ui/Card";
 
-export function FeaturePlaceholderGrid() {
+export function DashboardFeatureLinks() {
   return (
     <div className="space-y-4">
       <Card className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">

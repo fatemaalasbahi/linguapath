@@ -3,11 +3,10 @@ import { redirect } from "next/navigation";
 
 import { DashboardProgressCard } from "@/components/dashboard/DashboardProgressCard";
 import { ExamGoalSummary } from "@/components/dashboard/ExamGoalSummary";
-import { FeaturePlaceholderGrid } from "@/components/dashboard/FeaturePlaceholderGrid";
+import { DashboardFeatureLinks } from "@/components/dashboard/DashboardFeatureLinks";
 import { NextRecommendedAction } from "@/components/dashboard/NextRecommendedAction";
 import { RecentPracticeResult } from "@/components/dashboard/RecentPracticeResult";
 import { StudyPlanPreview } from "@/components/dashboard/StudyPlanPreview";
-import { SignOutButton } from "@/components/auth/SignOutButton";
 import { Card } from "@/components/ui/Card";
 import { auth } from "@/lib/auth/server";
 import { syncUserFromSession } from "@/lib/auth/sync-user";
@@ -67,15 +66,12 @@ export default async function DashboardPage() {
               progress.
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/exam-goals/setup"
-              className="text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
-            >
-              Edit Exam Goal
-            </Link>
-            <SignOutButton />
-          </div>
+          <Link
+            href="/exam-goals/setup"
+            className="text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm"
+          >
+            Edit Exam Goal
+          </Link>
         </div>
 
         <ExamGoalSummary profile={profile} />
@@ -100,7 +96,7 @@ export default async function DashboardPage() {
         <h2 className="text-lg font-semibold text-neutral-900">
           Learning Features
         </h2>
-        <FeaturePlaceholderGrid />
+        <DashboardFeatureLinks />
       </div>
     </div>
   );

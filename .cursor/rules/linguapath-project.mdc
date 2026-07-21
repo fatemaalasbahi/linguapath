@@ -178,7 +178,8 @@ NEON_AUTH_BASE_URL=
 NEON_AUTH_COOKIE_SECRET=
 ```
 
-Phase 9 notes:
+Phase 10 notes:
 
 - `SLACK_WEBHOOK_URL` is server-only and must never be sent to the client
 - User feedback is stored in the `feedback` table with `feedback_type`, `rating`, and `message`
+- See README.md and DEPLOYMENT.md for full env var and production verification guidance

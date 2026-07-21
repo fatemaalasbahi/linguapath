@@ -255,13 +255,20 @@ Slack behavior:
 
 ---
 
-## Phase 10: Deployment
+## Phase 10: Final Polish and Deployment
 
 Prepare:
 
-- Environment variables
-- Vercel deployment
-- Final testing
+- Expand README with overview, stack, env vars, local dev, deployment, architecture, limitations
+- Add DEPLOYMENT.md with pre-deploy, smoke-test, and link/route/console verification checklists
+- Small UI polish only (no new product features, no new shared UI abstractions unless fixing a real issue)
+- Remove duplicate Sign Out and redundant Back to Dashboard links after sidebar addition
+- Rename misnamed components (e.g. FeaturePlaceholderGrid → DashboardFeatureLinks)
+- Verify production deployment on Vercel
+- Run `npm run lint`, `npm run build`, `npm run db:test`
+- Production verification: broken links, 404 routes, browser console errors
+
+Do **not** modify AI logic, assessment logic, study plan generation, practice scoring, or database schema unless a production issue is discovered.
 
 ---
 

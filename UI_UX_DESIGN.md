@@ -1341,8 +1341,8 @@ Aligned with development phases:
 | **Phase 6** | Step indicator, prompt card, assessment textarea, AI results panels, AI disclaimer, AI badge |
 | **Phase 7** | Study plan accordion, plan overview bar, weekly task cards |
 | **Phase 8** | Practice prompt/textarea, AI feedback panel, progress bar, activity list, score/level history |
-| **Phase 9** | Feedback form, success alert, toast |
-| **Phase 10** | Deployment — no new components; polish and responsive verification |
+| **Phase 9** | Feedback form, success alert, app sidebar, mobile nav |
+| **Phase 10** | Deployment verification, README/DEPLOYMENT docs, UI polish (no new features) |
 
 ## Design Consistency Checklist
 
@@ -1352,6 +1352,11 @@ Before shipping any page, verify:
 - [ ] Correct heading hierarchy
 - [ ] AI content clearly labeled with badge and disclaimer
 - [ ] Exam type shows correct score vs. level fields
+- [ ] Loading, empty, and error states use consistent alert styling
+- [ ] Mobile bottom nav does not cover submit buttons
+- [ ] No duplicate Sign Out or redundant Back to Dashboard when sidebar is visible
+- [ ] All navigation links resolve (no 404s)
+- [ ] No uncaught console errors on primary user flows
 - [ ] No password fields in auth UI
 - [ ] Responsive at 375px, 768px, 1280px
 - [ ] Focus states visible

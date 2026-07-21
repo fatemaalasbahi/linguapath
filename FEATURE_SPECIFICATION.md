@@ -428,8 +428,19 @@ The MVP must include:
 ✅ Slack notification system  
 ✅ Responsive UI  
 ✅ Vercel deployment  
+✅ Production verification documented in [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ---
+
+# Deployment Verification
+
+Before marking the MVP complete, verify:
+
+- Lint, build, and database tests pass locally
+- Vercel production deployment is **READY**
+- All required environment variables are set (see README and `.env.example`)
+- Neon Auth trusted domains include the production URL
+- Link, route, and browser console checks in DEPLOYMENT.md pass on production
 
 # MVP User Flow
 

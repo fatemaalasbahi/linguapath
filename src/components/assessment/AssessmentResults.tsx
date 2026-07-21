@@ -99,14 +99,7 @@ export function AssessmentResults({ result }: AssessmentResultsProps) {
       </Card>
 
       <div className="flex flex-col gap-3 sm:flex-row">
-        <Button href="/dashboard" className="w-full sm:w-auto">
-          Back to Dashboard
-        </Button>
-        <Button
-          href="/study-plan"
-          variant="secondary"
-          className="w-full sm:w-auto"
-        >
+        <Button href="/study-plan" className="w-full sm:w-auto">
           Generate Study Plan
         </Button>
       </div>

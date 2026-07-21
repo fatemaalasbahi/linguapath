@@ -245,7 +245,9 @@ Authentication is handled by Neon Auth. The application `users` table stores pro
 
 ## Deployment
 
-- Vercel
+- Vercel (automatic deploys from `main`)
+- See [DEPLOYMENT.md](./DEPLOYMENT.md) for environment variables and verification checklists
+- Production URL: `https://linguapath-jet.vercel.app`
 
 ## Notifications
 
@@ -272,7 +274,7 @@ LinguaPath will be developed incrementally in small, testable phases.
 | Phase 7 | AI Study Plan Generation |
 | Phase 8 | Practice Feedback + Progress Tracking |
 | Phase 9 | Slack Notifications + Feedback System (form, rating, rate limit, Block Kit Slack, app sidebar) |
-| Phase 10 | Deployment |
+| Phase 10 | Final polish + deployment verification (README, DEPLOYMENT.md, UI consistency, production smoke tests) |
 
 ---
 
