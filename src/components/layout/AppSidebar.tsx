@@ -5,11 +5,13 @@ import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 
 import { SignOutButton } from "@/components/auth/SignOutButton";
+import { ComingSoonBadge } from "@/components/roadmap/ComingSoonBadge";
 import { cn } from "@/lib/utils";
 
 import {
   isNavItemActive,
   primaryNavItems,
+  roadmapNavItems,
   secondaryNavItems,
 } from "./nav-items";
 
@@ -22,11 +24,13 @@ function NavLink({
   label,
   icon: Icon,
   pathname,
+  comingSoon = false,
 }: {
   href: string;
   label: string;
   icon: LucideIcon;
   pathname: string;
+  comingSoon?: boolean;
 }) {
   const active = isNavItemActive(pathname, href);
 
@@ -42,7 +46,8 @@ function NavLink({
       aria-current={active ? "page" : undefined}
     >
       <Icon className="h-5 w-5 shrink-0" aria-hidden />
-      <span>{label}</span>
+      <span className="min-w-0 flex-1 truncate">{label}</span>
+      {comingSoon ? <ComingSoonBadge /> : null}
     </Link>
   );
 }
@@ -67,10 +72,19 @@ export function AppSidebar({ className }: AppSidebarProps) {
         </Link>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1" aria-label="Primary">
+      <nav className="flex flex-1 flex-col gap-1 overflow-y-auto" aria-label="Primary">
         {primaryNavItems.map((item) => (
           <NavLink key={item.href} pathname={pathname} {...item} />
         ))}
+
+        <div className="mt-4 space-y-1 border-t border-neutral-200 pt-4">
+          <p className="px-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+            Roadmap
+          </p>
+          {roadmapNavItems.map((item) => (
+            <NavLink key={item.href} pathname={pathname} {...item} />
+          ))}
+        </div>
       </nav>
 
       <div className="mt-auto space-y-3 border-t border-neutral-200 pt-4">

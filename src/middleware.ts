@@ -23,5 +23,9 @@ export const config = {
     "/practice/:path*",
     "/progress/:path*",
     "/feedback/:path*",
+    "/reading/:path*",
+    "/listening/:path*",
+    "/speaking/:path*",
+    "/mock-exam/:path*",
   ],
 };

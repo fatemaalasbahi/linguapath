@@ -128,7 +128,7 @@ Browser
 |-------|--------|-------|
 | Marketing | `/` | Landing page |
 | Auth | `/sign-in`, `/sign-up`, `/auth/continue` | Neon Auth UI |
-| Dashboard | `/dashboard`, `/exam-goals/setup`, `/assessment`, `/study-plan`, `/practice`, `/progress`, `/feedback` | Protected; sidebar + mobile nav |
+| Dashboard | `/dashboard`, `/exam-goals/setup`, `/assessment`, `/study-plan`, `/practice`, `/progress`, `/feedback`, `/reading`, `/listening`, `/speaking`, `/mock-exam` | Protected; sidebar + mobile nav |
 
 ### Key directories
 
@@ -171,6 +171,8 @@ Not in the MVP scope:
 - Native mobile app
 - Teacher marketplace or social features
 - Settings / profile management beyond auth
+
+Roadmap pages for **Reading**, **Listening**, **Speaking**, and **Mock Exam** are now visible in the authenticated app (sidebar and mobile navigation) with Coming Soon badges. These routes describe planned capabilities but do not yet provide the features.
 
 See [UI_UX_DESIGN.md](./UI_UX_DESIGN.md) and [FEATURE_SPECIFICATION.md](./FEATURE_SPECIFICATION.md) for full non-goals.
 
