@@ -16,6 +16,23 @@ export const baseAssessmentResultSchema = z.object({
 export type BaseAssessmentResult = z.infer<typeof baseAssessmentResultSchema>;
 export type AssessmentConfidence = z.infer<typeof confidenceSchema>;
 
+export function normalizeAssessmentForExam(
+  result: BaseAssessmentResult,
+  examType: ExamType,
+): BaseAssessmentResult {
+  if (examType === "DET") {
+    return {
+      ...result,
+      estimatedLevel: null,
+    };
+  }
+
+  return {
+    ...result,
+    estimatedScore: null,
+  };
+}
+
 export function validateAssessmentForExam(
   result: BaseAssessmentResult,
   examType: ExamType,

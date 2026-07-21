@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-import { evaluateWritingResponse } from "@/lib/ai/gemini";
+import { evaluateWritingResponse, isGeminiRateLimitError } from "@/lib/ai/gemini";
 import type { AssessmentDisplayResult } from "@/lib/ai/types";
 import { auth } from "@/lib/auth/server";
 import { syncUserFromSession } from "@/lib/auth/sync-user";
@@ -66,7 +66,14 @@ export async function submitAssessment(
       prompt.prompt,
       validation.sanitized,
     );
-  } catch {
+  } catch (error) {
+    if (isGeminiRateLimitError(error)) {
+      return {
+        error:
+          "The AI service is temporarily rate-limited. Please wait a minute and try again.",
+      };
+    }
+
     return {
       error:
         "We couldn't analyze your response. Please try again in a few moments.",
